@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 
 const AboutAuthForm = () => {
   const { toast } = useToast();
-  const router = useRouter();
+
   const form = useForm<z.infer<typeof aboutformSchema>>({
     resolver: zodResolver(aboutformSchema),
     defaultValues: {
@@ -27,9 +27,10 @@ const AboutAuthForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof aboutformSchema>) => {
+    console.log("onSubmit called"); // Debug log
     try {
       const result = await upsertAbout(values);
-      // console.log(values);
+      console.log("Form values:", values); // Debug log
       toast({
         title: "Data Update Successfully!",
       });
@@ -40,7 +41,7 @@ const AboutAuthForm = () => {
   };
 
   return (
-    <div className="mt-16">
+    <div className="mt-6">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid md:grid-cols-2 lg:grid-cols-2 grid-cols-1 md:gap-32 gap-2">
@@ -65,7 +66,7 @@ const AboutAuthForm = () => {
               label="Enter Your Description"
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 md:mt-8 mt-4 gap-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 md:mt-8 mt-4 md:gap-32 gap-4">
             <FormField
               control={form.control}
               name="imageurl"
@@ -103,7 +104,12 @@ const AboutAuthForm = () => {
               )}
             />
           </div>
-          <Button className="mt-16 w-full md:w-auto" type="submit">
+          <Button
+            className="mt-16 w-full md:w-auto bg-[#2563eb] hover:bg-[#2563eb]/90"
+            type="submit"
+            value="submit"
+            onClick={() => console.log("Button clicked")} // Debug log
+          >
             Save Changes
           </Button>
         </form>

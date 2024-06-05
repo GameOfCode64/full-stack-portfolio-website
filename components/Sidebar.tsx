@@ -3,12 +3,7 @@ import Image from "next/image";
 import React from "react";
 import logo from "@/public/pngwing.com.png";
 import Link from "next/link";
-import {
-  FolderGit2,
-  GanttChart,
-  GraduationCap,
-  LayoutDashboard,
-} from "lucide-react";
+import { FolderGit2, GanttChart, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
@@ -27,11 +22,6 @@ const Navlikes = [
     icon: FolderGit2,
     titel: "Add Project",
     href: "/dashboard/add-project",
-  },
-  {
-    icon: GraduationCap,
-    titel: "Add Experience",
-    href: "/dashboard/add-experience",
   },
 ];
 

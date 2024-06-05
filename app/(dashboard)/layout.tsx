@@ -1,3 +1,4 @@
+import MobileMenu from "@/components/MobileMenu";
 import DahboardSidebar from "@/components/Sidebar";
 
 export default function RootLayout({
@@ -8,6 +9,7 @@ export default function RootLayout({
   return (
     <div className="flex h-screen gap-8">
       <DahboardSidebar />
+      <MobileMenu />
       {children}
     </div>
   );

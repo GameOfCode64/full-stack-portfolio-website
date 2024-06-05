@@ -3,65 +3,28 @@ import { aboutformSchema } from "@/lib/formschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "./ui/use-toast";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import Custominput from "./CoustomInput";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Fileupload } from "./fileupload";
+import { Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
-import { Loader, Loader2 } from "lucide-react";
 
-const inputValue = [
-  {
-    name: "Backend",
-    value: "backend",
-  },
-  {
-    name: "Frontend",
-    value: "frontend",
-  },
-  {
-    name: "Other",
-    value: "other",
-  },
-];
-
-const SkillAuth = () => {
+const ProjectForm = () => {
   const [isLodding, setisLodding] = useState(false);
   const form = useForm<z.infer<typeof aboutformSchema>>({
     resolver: zodResolver(aboutformSchema),
     defaultValues: {
-      skillname: "",
-      skillimgurl: "",
-      skilltype: "",
+      titel: "",
+      projectdesc: "",
+      website: "",
+      githuburl: "",
+      projectimg: "",
     },
   });
-
   const onSubmit = (values: z.infer<typeof aboutformSchema>) => {
-    console.log("Hello");
-    try {
-      // setisLodding(true);
-      console.log(values);
-
-      toast({
-        title: ` Data Update Successfully! ${values}`,
-      });
-      // setisLodding(false);
-      // window.location.reload();
-    } catch (error) {
-      alert(`Error: ${error}`);
-    }
+    console.log(values);
   };
-
   return (
     <div className="py-8 px-1 relative">
       <Form {...form}>
@@ -69,45 +32,39 @@ const SkillAuth = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-2 grid-cols-1 md:gap-32 lg:gap-32 gap-4">
             <Custominput
               control={form.control}
-              name="skillname"
-              label="Enter Skill Name"
-              placeholder="Javascript"
+              name="titel"
+              label="Enter Project Titel"
+              placeholder="Full Stack Instagram Clone!"
             />
-            <FormField
+            <Custominput
               control={form.control}
-              name="skilltype"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Select Skill Type</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="focus:ring-1 focus:ring-[#91c753]">
-                        <SelectValue placeholder="Select Skill" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {inputValue.map((value) => (
-                        <SelectItem value={value.value} key={value.value}>
-                          {value.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
+              name="projectdesc"
+              label="Enter Project description"
+              placeholder="ReactJS, Redux, NodeJS, ExpressJS, MongoDB, TailwindCSS"
+            />
+          </div>
+          <div className="grid md:grid-cols-2 mt-4 md:mt-6 lg:mt-6 lg:grid-cols-2 grid-cols-1 md:gap-32 lg:gap-32 gap-4">
+            <Custominput
+              control={form.control}
+              name="githuburl"
+              label="Enter Github Url"
+              placeholder="https://github.com/GameOfCode64/full-stack-portfolio-website"
+            />
+            <Custominput
+              control={form.control}
+              name="projectdesc"
+              label="Enter Live Website Like"
+              placeholder="https://yourwebsitename.vercel.app"
             />
           </div>
           <div className="mt-4">
             <FormField
               control={form.control}
-              name="skillimgurl"
+              name="projectimg"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="font-semibold">
-                    Upload Skill Image
+                    Upload Project Banner Image
                   </FormLabel>
                   <FormControl>
                     <Fileupload
@@ -142,4 +99,4 @@ const SkillAuth = () => {
   );
 };
 
-export default SkillAuth;
+export default ProjectForm;
