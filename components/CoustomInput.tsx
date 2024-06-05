@@ -8,13 +8,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Control } from "react-hook-form";
+import { Control, FieldPath } from "react-hook-form";
 import { z } from "zod";
 import { aboutformSchema } from "@/lib/formschema";
 
 interface CustominputProps {
   control: Control<z.infer<typeof aboutformSchema>>;
-  name: string;
+  name: FieldPath<z.infer<typeof aboutformSchema>>;
   placeholder: string;
   label: string;
 }
