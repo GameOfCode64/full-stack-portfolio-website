@@ -41,12 +41,14 @@ const AuthForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <AuthCustominput
+              type="email"
               name="name"
               control={form.control}
               placeholder="Bhavishya Tripathi"
               label="Enter Email"
             />
             <AuthCustominput
+              type="password"
               name="password"
               control={form.control}
               placeholder="Password"

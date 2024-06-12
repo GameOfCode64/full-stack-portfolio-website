@@ -9,6 +9,8 @@ import Custominput from "./CoustomInput";
 import { Fileupload } from "./fileupload";
 import { Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
+import { toast } from "./ui/use-toast";
+import { projectAction } from "@/actions/project-action";
 
 const ProjectForm = () => {
   const [isLodding, setisLodding] = useState(false);
@@ -22,8 +24,15 @@ const ProjectForm = () => {
       projectimg: "",
     },
   });
-  const onSubmit = (values: z.infer<typeof aboutformSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof aboutformSchema>) => {
+    try {
+      const result = await projectAction(values);
+      toast({
+        title: ` Data Update Successfully! ${values}`,
+      });
+    } catch (error) {
+      alert(`Error: ${error}`);
+    }
   };
   return (
     <div className="py-8 px-1 relative">

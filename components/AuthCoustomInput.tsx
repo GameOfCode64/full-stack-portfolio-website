@@ -17,6 +17,7 @@ interface CustominputProps {
   name: FieldPath<z.infer<typeof aboutformSchema>>;
   placeholder: string;
   label: string;
+  type: string;
 }
 
 const AuthCustominput = ({
@@ -24,6 +25,7 @@ const AuthCustominput = ({
   name,
   placeholder,
   label,
+  type,
 }: CustominputProps) => {
   return (
     <FormField
@@ -36,6 +38,7 @@ const AuthCustominput = ({
             <Input
               placeholder={placeholder}
               {...field}
+              type={type}
               className="my-4 focus-visible:ring-1 focus-visible:ring-[#91c753]  min-w-auto md:min-w-auto"
             />
           </FormControl>

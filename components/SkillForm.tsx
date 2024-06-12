@@ -19,6 +19,7 @@ import {
 import { Fileupload } from "./fileupload";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
+import { skillAction } from "@/actions/skill-acton";
 
 const inputValue = [
   {
@@ -46,17 +47,12 @@ const SkillAuth = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof aboutformSchema>) => {
-    console.log("Hello");
+  const onSubmit = async (values: z.infer<typeof aboutformSchema>) => {
     try {
-      // setisLodding(true);
-      console.log(values);
-
+      const result = await skillAction(values);
       toast({
         title: ` Data Update Successfully! ${values}`,
       });
-      // setisLodding(false);
-      // window.location.reload();
     } catch (error) {
       alert(`Error: ${error}`);
     }
